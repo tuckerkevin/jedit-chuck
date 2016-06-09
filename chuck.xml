@@ -1,0 +1,286 @@
+<?xml version="1.0"?>
+<!DOCTYPE MODE SYSTEM "xmode.dtd">
+
+<!--
+	ChucK (http://chuck.cs.princeton.edu/) mode by Kevin Tucker
+
+	catalog line:
+	<MODE NAME="ChucK" FILE="chuck.xml" FILE_NAME_GLOB="*.ck" />
+	-->
+
+<MODE>
+	<PROPS>
+		<PROPERTY NAME="commentStart" VALUE="/*"/>
+		<PROPERTY NAME="commentEnd" VALUE="*/"/>
+		<PROPERTY NAME="lineComment" VALUE="//"/>
+		<PROPERTY NAME="indentOpenBrackets" VALUE="{" />
+		<PROPERTY NAME="indentCloseBrackets" VALUE="}" />
+	</PROPS>
+
+	<RULES
+		IGNORE_CASE="FALSE"
+		HIGHLIGHT_DIGITS="TRUE"
+		DIGIT_RE="([0-9]+)|(0x[0-9a-fA-F]+)">
+
+		<SPAN TYPE="COMMENT1">
+			<BEGIN>/*</BEGIN>
+			<END>*/</END>
+		</SPAN>
+
+		<SPAN TYPE="LITERAL1" NO_LINE_BREAK="TRUE" ESCAPE="\">
+			<BEGIN>"</BEGIN>
+			<END>"</END>
+		</SPAN>
+
+		<MARK_PREVIOUS TYPE="FUNCTION" MATCH_TYPE="OPERATOR">(</MARK_PREVIOUS>
+		<SEQ TYPE="OPERATOR">)</SEQ>
+
+		<EOL_SPAN TYPE="COMMENT2">//</EOL_SPAN>
+
+		<SEQ TYPE="OPERATOR">}</SEQ>
+		<SEQ TYPE="OPERATOR">{</SEQ>
+		<SEQ TYPE="OPERATOR">]</SEQ>
+		<SEQ TYPE="OPERATOR">[</SEQ>
+
+		<!-- debug print -->
+		<SEQ TYPE="MARKUP">&gt;&gt;&gt;</SEQ>
+		<SEQ TYPE="MARKUP">&lt;&lt;&lt;</SEQ>
+
+		<!-- http://chuck.cs.princeton.edu/doc/language/oper.html -->
+
+		<!-- chuck -->
+		<SEQ TYPE="OPERATOR">=&gt;</SEQ>
+		<SEQ TYPE="OPERATOR">@=&gt;</SEQ>
+		<SEQ TYPE="OPERATOR">+=&gt;</SEQ>
+		<SEQ TYPE="OPERATOR">-=&gt;</SEQ>
+		<SEQ TYPE="OPERATOR">*=&gt;</SEQ>
+		<SEQ TYPE="OPERATOR">/=&gt;</SEQ>
+		<SEQ TYPE="OPERATOR">%=&gt;</SEQ>
+		<SEQ TYPE="OPERATOR">&amp;=&gt;</SEQ>
+		<SEQ TYPE="OPERATOR">|=&gt;</SEQ>
+
+		<!-- arithmetic -->
+		<SEQ TYPE="OPERATOR">+</SEQ>
+		<SEQ TYPE="OPERATOR">-</SEQ>
+		<SEQ TYPE="OPERATOR">*</SEQ>
+		<SEQ TYPE="OPERATOR">/</SEQ>
+
+		<!-- cast -->
+		<SEQ TYPE="OPERATOR">$</SEQ>
+
+		<!-- modulo -->
+		<SEQ TYPE="OPERATOR">%</SEQ>
+
+		<!-- logic -->
+		<SEQ TYPE="OPERATOR">&amp;&amp;</SEQ>
+		<SEQ TYPE="OPERATOR">||</SEQ>
+		<SEQ TYPE="OPERATOR">==</SEQ>
+		<SEQ TYPE="OPERATOR">!=</SEQ>
+		<SEQ TYPE="OPERATOR">&gt;=</SEQ>
+		<SEQ TYPE="OPERATOR">&gt;</SEQ>
+		<SEQ TYPE="OPERATOR">&lt;=</SEQ>
+		<SEQ TYPE="OPERATOR">&lt;</SEQ>
+
+		<!-- bitwise -->
+		<SEQ TYPE="OPERATOR">&gt;&gt;</SEQ>
+		<SEQ TYPE="OPERATOR">&lt;&lt;</SEQ>
+		<SEQ TYPE="OPERATOR">&amp;</SEQ>
+		<SEQ TYPE="OPERATOR">|</SEQ>
+		<SEQ TYPE="OPERATOR">^</SEQ>
+
+		<!-- inc / dec -->
+		<SEQ TYPE="OPERATOR">++</SEQ>
+		<SEQ TYPE="OPERATOR">--</SEQ>
+
+		<!-- unary -->
+		<SEQ TYPE="OPERATOR">!</SEQ>
+
+		<!-- other -->
+		<SEQ TYPE="OPERATOR">;</SEQ>
+		<SEQ TYPE="OPERATOR">~</SEQ>
+		<SEQ TYPE="OPERATOR">::</SEQ>
+		<SEQ TYPE="OPERATOR">@</SEQ>
+
+		<KEYWORDS>
+			<!-- http://chuck.cs.princeton.edu/doc/language/overview.html#reserve -->
+
+			<!-- primitive types -->
+			<KEYWORD2>int</KEYWORD2>
+			<KEYWORD2>float</KEYWORD2>
+			<KEYWORD2>time</KEYWORD2>
+			<KEYWORD2>dur</KEYWORD2>
+			<KEYWORD2>void</KEYWORD2>
+			<KEYWORD2>same</KEYWORD2> <!-- unimplemented -->
+
+			<!-- control structures -->
+			<KEYWORD1>if</KEYWORD1>
+			<KEYWORD1>else</KEYWORD1>
+			<KEYWORD1>while</KEYWORD1>
+			<KEYWORD1>until</KEYWORD1>
+			<KEYWORD1>for</KEYWORD1>
+			<KEYWORD1>repeat</KEYWORD1>
+			<KEYWORD1>break</KEYWORD1>
+			<KEYWORD1>continue</KEYWORD1>
+			<KEYWORD1>return</KEYWORD1>
+			<KEYWORD1>switch</KEYWORD1> <!-- unimplemented -->
+
+			<!-- class keywords -->
+			<KEYWORD1>class</KEYWORD1>
+			<KEYWORD1>extends</KEYWORD1>
+			<KEYWORD1>public</KEYWORD1>
+			<KEYWORD1>static</KEYWORD1>
+			<KEYWORD1>pure</KEYWORD1>
+			<KEYWORD1>this</KEYWORD1>
+			<KEYWORD1>super</KEYWORD1> <!-- unimplemented -->
+			<KEYWORD1>interface</KEYWORD1> <!-- unimplemented -->
+			<KEYWORD1>implements</KEYWORD1> <!-- unimplemented -->
+			<KEYWORD1>protected</KEYWORD1> <!-- unimplemented -->
+			<KEYWORD1>private</KEYWORD1> <!-- unimplemented -->
+
+			<!-- other chuck keywords -->
+			<KEYWORD1>function</KEYWORD1>
+			<KEYWORD1>fun</KEYWORD1>
+			<KEYWORD1>spork</KEYWORD1>
+			<KEYWORD1>const</KEYWORD1>
+			<KEYWORD1>new</KEYWORD1>
+
+			<!-- special values -->
+			<LITERAL3>now</LITERAL3>
+			<LITERAL3>true</LITERAL3>
+			<LITERAL3>false</LITERAL3>
+			<LITERAL3>maybe</LITERAL3>
+			<LITERAL3>null</LITERAL3>
+			<LITERAL3>NULL</LITERAL3>
+			<LITERAL3>me</LITERAL3>
+			<LITERAL3>pi</LITERAL3>
+
+			<!-- special : default durations -->
+			<KEYWORD2>samp</KEYWORD2>
+			<KEYWORD2>ms</KEYWORD2>
+			<KEYWORD2>second</KEYWORD2>
+			<KEYWORD2>minute</KEYWORD2>
+			<KEYWORD2>hour</KEYWORD2>
+			<KEYWORD2>day</KEYWORD2>
+			<KEYWORD2>week</KEYWORD2>
+
+			<!-- special : global ugens -->
+			<LITERAL4>dac</LITERAL4>
+			<LITERAL4>adc</LITERAL4>
+			<LITERAL4>blackhole</LITERAL4>
+
+			<!-- http://chuck.cs.princeton.edu/doc/program/ugen.html -->
+
+			<!-- standard ChucK unit generators -->
+			<KEYWORD3>SinOsc</KEYWORD3>
+			<KEYWORD3>PulseOsc</KEYWORD3>
+			<KEYWORD3>SqrOsc</KEYWORD3>
+			<KEYWORD3>TriOsc</KEYWORD3>
+			<KEYWORD3>SawOsc</KEYWORD3>
+			<KEYWORD3>Phasor</KEYWORD3>
+			<KEYWORD3>Noise</KEYWORD3>
+			<KEYWORD3>Impulse</KEYWORD3>
+			<KEYWORD3>Step</KEYWORD3>
+			<KEYWORD3>Gain</KEYWORD3>
+			<KEYWORD3>SndBuf</KEYWORD3>
+			<KEYWORD3>HalfRect</KEYWORD3>
+			<KEYWORD3>FullRect</KEYWORD3>
+			<KEYWORD3>ZeroX</KEYWORD3>
+			<KEYWORD3>Mix2</KEYWORD3>
+			<KEYWORD3>Pan2</KEYWORD3>
+			<KEYWORD3>GenX</KEYWORD3>
+			<KEYWORD3>CurveTable</KEYWORD3>
+			<KEYWORD3>WarpTable</KEYWORD3>
+			<KEYWORD3>LiSa</KEYWORD3>
+
+			<!-- filters -->
+			<KEYWORD3>OneZero</KEYWORD3>
+			<KEYWORD3>TwoZero</KEYWORD3>
+			<KEYWORD3>OnePole</KEYWORD3>
+			<KEYWORD3>TwoPole</KEYWORD3>
+			<KEYWORD3>PoleZero</KEYWORD3>
+			<KEYWORD3>BiQuad</KEYWORD3>
+			<KEYWORD3>Filter</KEYWORD3>
+			<KEYWORD3>LPF</KEYWORD3>
+			<KEYWORD3>HPF</KEYWORD3>
+			<KEYWORD3>BPF</KEYWORD3>
+			<KEYWORD3>BRF</KEYWORD3>
+			<KEYWORD3>ResonZ</KEYWORD3>
+			<KEYWORD3>Dyno</KEYWORD3>
+
+			<!-- STK unit generators in ChucK -->
+			<KEYWORD3>Envelope</KEYWORD3>
+			<KEYWORD3>ADSR</KEYWORD3>
+			<KEYWORD3>Delay</KEYWORD3>
+			<KEYWORD3>DelayA</KEYWORD3>
+			<KEYWORD3>DelayL</KEYWORD3>
+			<KEYWORD3>Echo</KEYWORD3>
+			<KEYWORD3>JCRev</KEYWORD3>
+			<KEYWORD3>NRev</KEYWORD3>
+			<KEYWORD3>PRCRev</KEYWORD3>
+			<KEYWORD3>Chorus</KEYWORD3>
+			<KEYWORD3>Modulate</KEYWORD3>
+			<KEYWORD3>PitShift</KEYWORD3>
+			<KEYWORD3>SubNoise</KEYWORD3>
+			<KEYWORD3>Blit</KEYWORD3>
+			<KEYWORD3>BlitSaw</KEYWORD3>
+			<KEYWORD3>BlitSquare</KEYWORD3>
+			<KEYWORD3>WvIn</KEYWORD3>
+			<KEYWORD3>WaveLoop</KEYWORD3>
+			<KEYWORD3>WvOut</KEYWORD3>
+
+			<!-- STK instruments unit generators -->
+			<KEYWORD3>StkInstrument</KEYWORD3>
+			<KEYWORD3>BandedWG</KEYWORD3>
+			<KEYWORD3>BlowBotl</KEYWORD3>
+			<KEYWORD3>BlowHole</KEYWORD3>
+			<KEYWORD3>Bowed</KEYWORD3>
+			<KEYWORD3>Brass</KEYWORD3>
+			<KEYWORD3>Clarinet</KEYWORD3>
+			<KEYWORD3>Flute</KEYWORD3>
+			<KEYWORD3>Mandolin</KEYWORD3>
+			<KEYWORD3>ModalBar</KEYWORD3>
+			<KEYWORD3>Moog</KEYWORD3>
+			<KEYWORD3>Saxofony</KEYWORD3>
+			<KEYWORD3>Shakers</KEYWORD3>
+			<KEYWORD3>Sitar</KEYWORD3>
+			<KEYWORD3>StifKarp</KEYWORD3>
+			<KEYWORD3>VoicForm</KEYWORD3>
+			<KEYWORD3>FM</KEYWORD3>
+			<KEYWORD3>BeeThree</KEYWORD3>
+			<KEYWORD3>FMVoices</KEYWORD3>
+			<KEYWORD3>HevyMetl</KEYWORD3>
+			<KEYWORD3>PercFlut</KEYWORD3>
+			<KEYWORD3>Rhodey</KEYWORD3>
+			<KEYWORD3>TubeBell</KEYWORD3>
+			<KEYWORD3>Wurley</KEYWORD3>
+
+			<!-- http://chuck.cs.princeton.edu/doc/program/uana.html -->
+
+			<!-- basic UAna classes -->
+			<KEYWORD3>UAna</KEYWORD3>
+			<KEYWORD3>UAnaBlob</KEYWORD3>
+			<KEYWORD3>Windowing</KEYWORD3>
+
+			<!-- transformations -->
+			<KEYWORD3>FFT</KEYWORD3>
+			<KEYWORD3>IFFT</KEYWORD3>
+			<KEYWORD3>DCT</KEYWORD3>
+			<KEYWORD3>IDCT</KEYWORD3>
+
+			<!-- feature extractors -->
+			<KEYWORD3>Centroid</KEYWORD3>
+			<KEYWORD3>Flux</KEYWORD3>
+			<KEYWORD3>RMS</KEYWORD3>
+			<KEYWORD3>RollOff</KEYWORD3>
+
+			<!-- http://chuck.cs.princeton.edu/doc/language/event.html -->
+
+			<KEYWORD4>Event</KEYWORD4>
+			<KEYWORD4>MidiIn</KEYWORD4>
+			<KEYWORD4>MidiMsg</KEYWORD4>
+			<KEYWORD4>OscRecv</KEYWORD4>
+			<KEYWORD4>OscEvent</KEYWORD4>
+		</KEYWORDS>
+	</RULES>
+</MODE>
+
